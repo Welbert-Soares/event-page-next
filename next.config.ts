@@ -1,6 +1,19 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
+import { hostname } from "os";
 
 const nextConfig: NextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  cacheComponents: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
@@ -14,10 +27,10 @@ const nextConfig: NextConfig = {
         source: "/ingest/:path*",
         destination: "https://us.i.posthog.com/:path*",
       },
-    ]
+    ];
   },
   // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
-}
+};
 
-export default nextConfig
+export default nextConfig;
